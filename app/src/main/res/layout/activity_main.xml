@@ -23,7 +23,7 @@
         android:text="@string/choisis_le_th_me_des_cartes" />
 
     <TableRow
-        android:id="@+id/choixavantcartes"
+        android:id="@+id/choixthemes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -34,9 +34,9 @@
         android:text="@string/choisis_le_dos_des_cartes" />
 
     <TableRow
-        android:id="@+id/choixarrierecartes"
+        android:id="@+id/choixfonds"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="200dp" />
 
     <TextView
         android:id="@+id/nbcartes"
