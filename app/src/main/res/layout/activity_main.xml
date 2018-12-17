@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:hint="@string/ecris_ton_nom_ici" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/choixavant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choisis_le_th_me_des_cartes" />
+
+    <TableRow
+        android:id="@+id/choixavantcartes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/choixarriere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choisis_le_dos_des_cartes" />
+
+    <TableRow
+        android:id="@+id/choixarrierecartes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/nbcartes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_de_cartes" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:progress="1" />
+
+    <Button
+        android:id="@+id/validate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/valider" />
+</LinearLayout>
