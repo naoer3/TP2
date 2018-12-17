@@ -5,4 +5,6 @@
     <string name="choisis_le_th_me_des_cartes">Choisis le thème des cartes :</string>
     <string name="ecris_ton_nom_ici">Ecris ton nom ici</string>
     <string name="valider">Valider</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

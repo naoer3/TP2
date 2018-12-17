@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private TableRow tableRow_fonds = null;
     private TableRow tableRow_themes = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

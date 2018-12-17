@@ -14,16 +14,19 @@
                         <option name="children">
                           <map>
                             <entry key="launcher">
+                            <entry key="actionbar">
                               <value>
                                 <PersistentState>
                                   <option name="children">
                                     <map>
                                       <entry key="foregroundImage">
+                                      <entry key="image">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
                                                 <entry key="trimmed" value="true" />
+                                                <entry key="paddingPercent" value="5" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -39,11 +42,19 @@
                                       <entry key="foregroundImage" value="D:\Documents\Perso\Vinde\ISTIA\EI5-Contrat_pro\Programmation_mobile\TP_2\memory.png" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground_mem" />
                                       <entry key="outputName" value="launcher_mem" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\mathp\Downloads\memory.png" />
+                                      <entry key="outputName" value="game" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
