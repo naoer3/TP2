@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Paramètres"
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"/>
+    <item android:title="Jeu"
+        android:id="@+id/action_game"
+        android:icon="@drawable/game"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"/>
+    <item android:title="Jeu"
+        android:id="@+id/action_rank"
+        android:icon="@drawable/rank"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"/>
+    <item android:title="Jeu"
+        android:id="@+id/action_pause"
+        android:icon="@drawable/pause"
+        android:orderInCategory="4"
+        app:showAsAction="ifRoom"/>
+</menu>
