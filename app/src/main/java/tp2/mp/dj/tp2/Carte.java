@@ -1,9 +1,9 @@
 package tp2.mp.dj.tp2;
 
-import android.content.Context;
-import android.net.Uri;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,5 +62,19 @@ public class Carte extends Fragment implements View.OnClickListener{
 
     public void decouvrirCarte(){
         image.setImageResource(getResources().getIdentifier("drawable/" + imageAvant, null,getContext().getPackageName()));
+    }
+
+    public int getHauteur(){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.y;
+    }
+
+    public int getLargeur(){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x;
     }
 }
