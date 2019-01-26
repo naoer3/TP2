@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="@string/ecris_ton_nom_ici" />
+        android:hint="@string/ecris_ton_nom_ici"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/choixavant"
@@ -25,7 +25,9 @@
     <TableRow
         android:id="@+id/choixthemes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/choixarriere"
@@ -36,20 +38,69 @@
     <TableRow
         android:id="@+id/choixfonds"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content">
+
+    </TableRow>
 
     <TextView
-        android:id="@+id/nbcartes"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mode_de_jeu" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nombre_de_cartes" />
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbzen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/zen" />
+
+        <RadioButton
+            android:id="@+id/rbnormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/normal" />
+
+        <RadioButton
+            android:id="@+id/rbclm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/contre_la_montre" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nbcartes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre_de_cartes" />
+
+        <TextView
+            android:id="@+id/valeurnbcartes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp" />
+    </LinearLayout>
 
     <SeekBar
         android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        style="@android:style/Widget.DeviceDefault.SeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
+        android:max="5"
         android:progress="1" />
 
     <Button

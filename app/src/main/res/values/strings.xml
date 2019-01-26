@@ -7,4 +7,8 @@
     <string name="valider">Valider</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mode_de_jeu">Mode de jeu :</string>
+    <string name="zen">Zen</string>
+    <string name="normal">Normal</string>
+    <string name="contre_la_montre">Contre-la-montre</string>
 </resources>
