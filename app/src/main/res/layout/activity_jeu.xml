@@ -35,16 +35,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/jeu_cartes">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <fragment
-                android:id="@+id/fragment1"
-                android:name="tp2.mp.dj.tp2.Carte"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableRow>
     </TableLayout>
 
 </LinearLayout>
