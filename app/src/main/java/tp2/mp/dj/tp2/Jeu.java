@@ -4,18 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -32,9 +31,7 @@ public class Jeu extends AppCompatActivity {
     private int pairesTrouvees = 0;
 
     private int taille_ecran_X = 0;
-    private int taille_ecran_Y = 0;
     private int taille_carte_X = 0;
-    private int taille_carte_Y = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +42,20 @@ public class Jeu extends AppCompatActivity {
         if(toolbar != null) setSupportActionBar(toolbar);
 
         table = (TableLayout) findViewById(R.id.jeu_cartes);
-
-        carte = (Carte) getSupportFragmentManager().findFragmentById(R.id.fragment1);
-
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        List<Carte> jeu = new ArrayList<>();
+        List<Integer> jeu = new ArrayList<>();
         Random rdm = new Random();
-        //Récupérer la taille de l'écran définir le nombre de cartes à mettre par ligne (TableRow)
-        //Réussir a ajouter des fragments dans un TableRow
-        //Initialiser la carte avec le fond et le dos choisis
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
 
         taille_ecran_X = size.x;
-        taille_ecran_Y = size.y;
-
-        taille_carte_X = carte.getLargeur();
-        taille_carte_Y = carte.getHauteur();
+        taille_carte_X = 150;
 
         int nb_carte_ligne = (int)Math.floor(taille_ecran_X / taille_carte_X);
-        int nb_carte_totale = prefs.getInt("NB_CARTES",0) * 2;
+        int nb_carte_totale = prefs.getInt("NB_CARTES",8) * 2;
         int nb_ligne = nb_carte_totale / nb_carte_ligne;
         int nb_carte_der_ligne = nb_carte_totale - (nb_carte_ligne * nb_ligne);
 
@@ -79,11 +63,10 @@ public class Jeu extends AppCompatActivity {
         int arriere = prefs.getInt("FOND",0);
 
         for (int i=0;i < nb_carte_totale/2; i++){
+            //Ne pas reprendre les numeros deja pris
             int id = rdm.nextInt(10);
-            Carte carte = new Carte();
-            carte.init(avant,arriere,id);
-            jeu.add(carte);
-            jeu.add(carte);
+            jeu.add(id);
+            jeu.add(id);
         }
 
         Collections.shuffle(jeu);
@@ -91,11 +74,44 @@ public class Jeu extends AppCompatActivity {
         int index = 0;
         for(int i=0;i<nb_ligne;i++){
             TableRow tb = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            tb.setLayoutParams(lp);
+            table.addView(tb, i);
             for(int j=0; j<nb_carte_ligne; j++) {
-                //ajouter la carte a l'indice index dans la case
+                Bundle bd = new Bundle();
+                Carte carte = new Carte();
+                bd.putString("avant", avant);
+                bd.putInt("fond", arriere);
+                //Jeu est une liste de int
+                bd.putInt("id", jeu.get(index));
+                carte.setArguments(bd);
+                getSupportFragmentManager().beginTransaction().add(tb.getId(),carte).commit();
+                index++;
             }
-            // Attention a la derniere ligne
         }
+        //La dernière ligne
+        /*TableRow tb = new TableRow(this);
+        TableLayout.LayoutParams layoutParam = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
+        table.addView(tb);
+        for(int i=0;i<nb_carte_der_ligne;i++){
+            Bundle bd = new Bundle();
+            bd.putString("avant", avant);
+            bd.putInt("fond", arriere);
+            bd.putInt("id", jeu.get(index));
+            Carte carte = new Carte();
+            carte.setArguments(bd);
+            int a = tb.getId();
+            getSupportFragmentManager().beginTransaction().add(tb.getId(),carte).commit();
+            index++;
+        }*/
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+
     }
 
     @Override

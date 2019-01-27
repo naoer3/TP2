@@ -27,18 +27,23 @@ public class Carte extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        numPaire = this.getArguments().getInt("id",0);
+        imageAvant = this.getArguments().getString("avant","minion") + numPaire;
+        fond = "fond" + this.getArguments().getInt("fond",0);
+
         view = inflater.inflate(R.layout.fragment_carte, container, false);
         image = (ImageButton)view.findViewById(R.id.carte);
         image.setOnClickListener(this);
+
+        couvrirCarte();
+
         return view;
     }
 
     public void init(String avant, int arriere, int id){
-        imageAvant = avant + id;
-        fond = "fond" + arriere;
         numPaire = id;
-
-        couvrirCarte();
+        imageAvant = avant + numPaire;
+        fond = "fond" + arriere;
     }
 
     public int getNumPaire() {
@@ -57,24 +62,10 @@ public class Carte extends Fragment implements View.OnClickListener{
     }
 
     public void couvrirCarte(){
-        image.setImageResource(getResources().getIdentifier("drawable/" + fond, null,getContext().getPackageName()));
+        image.setImageResource(getResources().getIdentifier(fond,"drawable", getContext().getPackageName()));
     }
 
     public void decouvrirCarte(){
-        image.setImageResource(getResources().getIdentifier("drawable/" + imageAvant, null,getContext().getPackageName()));
-    }
-
-    public int getHauteur(){
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size.y;
-    }
-
-    public int getLargeur(){
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size.x;
+        image.setImageResource(getResources().getIdentifier(imageAvant, "drawable",getContext().getPackageName()));
     }
 }
