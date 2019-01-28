@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Jeu"
-    android:orientation="vertical">
+    tools:context=".Jeu">
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_jeu"
@@ -27,14 +27,16 @@
             android:layout_height="wrap_content"
             android:text="(temps)"
             android:gravity="right"/>
-
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/jeu_cartes">
-
-    </TableLayout>
-
+    <GridView
+        android:id="@+id/jeu_cartes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="110dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
 </LinearLayout>
