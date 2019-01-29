@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Memory_Jaunault_Paris</string>
-    <string name="nombre_de_cartes">Nombre de cartes :</string>
+    <string name="nombre_de_cartes">Nombre de paires :</string>
     <string name="choisis_le_dos_des_cartes">Choisis le dos des cartes :</string>
     <string name="choisis_le_th_me_des_cartes">Choisis le thème des cartes :</string>
     <string name="ecris_ton_nom_ici">Ecris ton nom ici</string>

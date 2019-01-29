@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button validate = null;
     private int nb_fonds =4 ;
     private int nb_themes = 4;
-    private List themes = Arrays.asList("pokemon", "chaton", "chiot", "minion");
+    private List<String> themes = Arrays.asList("pokemon", "chaton", "chiot", "minion");
     private TableRow tableRow_fonds = null;
     private TableRow tableRow_themes = null;
     private RadioGroup group = null;
@@ -96,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("NAME",name_user);
                 editor.putInt("NB_CARTES", nb_cartes);
                 editor.putInt("MODEJEU", mode_jeu);
-                editor.putInt("SELECTED_FOND", selected_fond);
-                editor.putInt("SELECTED_THEME", selected_theme);
+                editor.putInt("FOND", selected_fond);
+                String theme = themes.get(selected_theme);
+                editor.putString("THEME", theme);
                 editor.apply();
                 // TODO Envoyer le mode de jeu + fond + theme
             }
@@ -108,14 +109,19 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String name_user = prefs.getString("NAME", null);
         nb_cartes = prefs.getInt("NB_CARTES",3);
-        mode_jeu = prefs.getInt("MODEJEU",R.id.rbnormal);
+        mode_jeu = prefs.getInt("MODEJEU",0);
         group.check(group.getChildAt(mode_jeu).getId());
         editName.setText(name_user);
         valeurnbcartes.setText(String.valueOf(nb_cartes));
         seeknbcartes.setProgress(nb_cartes - 3);
-        selected_fond = prefs.getInt("SELECTED_FOND", 0);
+        selected_fond = prefs.getInt("FOND", 0);
         tableRow_fonds.getVirtualChildAt(selected_fond).setSelected(true);
-        selected_theme = prefs.getInt("SELECTED_THEME", 0);
+        String theme = prefs.getString("THEME", "chatons");
+        // TODO optimiser la recherche
+        for (int i = 0; i<themes.size();i++){
+            if(theme.matches(themes.get(i)))
+                selected_theme = i;
+        }
         tableRow_themes.getVirtualChildAt(selected_theme).setSelected(true);
     }
 

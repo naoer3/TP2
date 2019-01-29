@@ -2,13 +2,16 @@ package tp2.mp.dj.tp2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.StateListDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +45,7 @@ public class Jeu extends AppCompatActivity {
         super.onStart();
 
         List<Integer> jeu = new ArrayList<>();
-        List<Integer> carte = new ArrayList<>();
+        List<ImageView> cartes = new ArrayList<>();
 
         int nb_carte_totale = prefs.getInt("NB_CARTES",8) * 2;
 
@@ -64,13 +67,28 @@ public class Jeu extends AppCompatActivity {
 
         Collections.shuffle(jeu);
 
+
         for(int j=0; j<jeu.size(); j++) {
-            carte.add(getResources().getIdentifier(avant + jeu.get(j),"drawable",getPackageName()));
+            ImageView carte = new ImageView(this);
+            StateListDrawable states = new StateListDrawable();
+            states.addState(new int[] {android.R.attr.state_selected},
+                    getResources().getDrawable(getResources().getIdentifier(avant + jeu.get(j),"drawable",getPackageName())));
+            states.addState(new int[] {-android.R.attr.state_selected},
+                    getResources().getDrawable(getResources().getIdentifier("fond"+arriere,"drawable",getPackageName())));
+            carte.setImageDrawable(states);
+            cartes.add(carte);
+            carte.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View image) {
+                    if(image.isSelected())
+                        image.setSelected(false);
+                    else
+                        image.setSelected(true);
+                }
+            });
         }
-
-        Collections.shuffle(carte);
-
-        table.setAdapter(new CarteAdapter(this, carte));
+        Collections.shuffle(cartes);
+        table.setAdapter(new CarteAdapter(this, cartes));
     }
 
     @Override
