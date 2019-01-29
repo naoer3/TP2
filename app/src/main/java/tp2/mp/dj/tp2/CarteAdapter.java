@@ -11,9 +11,9 @@ import java.util.List;
 public class CarteAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<Integer> images;
+    private List<ImageView> images;
 
-    public CarteAdapter(Context c, List<Integer> liste) {
+    public CarteAdapter(Context c, List<ImageView> liste) {
         mContext = c;
         images = liste;
     }
@@ -31,14 +31,14 @@ public class CarteAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        /*ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(mContext);
         } else {
             imageView = (ImageView) convertView;
-        }
+        }*/
 
-        imageView.setImageResource(images.get(position));
-        return imageView;
+        //imageView.setImageResource(images.get(position));
+        return images.get(position);
     }
 }
