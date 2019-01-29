@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("NAME",name_user);
                 editor.putInt("NB_CARTES", nb_cartes);
                 editor.putInt("MODEJEU", mode_jeu);
-                editor.putInt("SELECTED_FOND", selected_fond);
-                editor.putInt("SELECTED_THEME", selected_theme);
+                editor.putInt("FOND", selected_fond);
+                editor.putInt("THEME", selected_theme);
                 editor.apply();
                 // TODO Envoyer le mode de jeu + fond + theme
             }
@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
         editName.setText(name_user);
         valeurnbcartes.setText(String.valueOf(nb_cartes));
         seeknbcartes.setProgress(nb_cartes - 3);
-        selected_fond = prefs.getInt("SELECTED_FOND", 0);
+        selected_fond = prefs.getInt("FOND", 0);
         tableRow_fonds.getVirtualChildAt(selected_fond).setSelected(true);
-        selected_theme = prefs.getInt("SELECTED_THEME", 0);
+        selected_theme = prefs.getInt("THEME", 0);
         tableRow_themes.getVirtualChildAt(selected_theme).setSelected(true);
     }
 
