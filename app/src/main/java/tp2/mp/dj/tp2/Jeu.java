@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +27,10 @@ public class Jeu extends AppCompatActivity {
 
     private int carteRetourne = 0;
     private int pairesTrouvees = 0;
+    private int pairesTotales = 0;
+
+    private View premiere_carte_paire = null;
+    private View deuxieme_carte_paire = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class Jeu extends AppCompatActivity {
         List<Integer> jeu = new ArrayList<>();
         List<ImageView> cartes = new ArrayList<>();
 
-        int nb_carte_totale = prefs.getInt("NB_CARTES",8) * 2;
+        pairesTotales = prefs.getInt("NB_CARTES",8);
 
         String avant = prefs.getString("THEME","chaton");
         int arriere = prefs.getInt("FOND",0);
@@ -59,7 +64,7 @@ public class Jeu extends AppCompatActivity {
 
         Collections.shuffle(numero);
 
-        for (int i=0;i < nb_carte_totale/2; i++){
+        for (int i=0;i < pairesTotales; i++){
             jeu.add(numero.get(0));
             jeu.add(numero.get(0));
             numero.remove(0);
@@ -67,27 +72,51 @@ public class Jeu extends AppCompatActivity {
 
         Collections.shuffle(jeu);
 
-
         for(int j=0; j<jeu.size(); j++) {
-            ImageView carte = new ImageView(this);
+            final ImageView carte = new ImageView(this);
             StateListDrawable states = new StateListDrawable();
             states.addState(new int[] {android.R.attr.state_selected},
                     getResources().getDrawable(getResources().getIdentifier(avant + jeu.get(j),"drawable",getPackageName())));
             states.addState(new int[] {-android.R.attr.state_selected},
                     getResources().getDrawable(getResources().getIdentifier("fond"+arriere,"drawable",getPackageName())));
             carte.setImageDrawable(states);
+            carte.setTag(jeu.get(j));
             cartes.add(carte);
             carte.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View image) {
-                    if(image.isSelected())
-                        image.setSelected(false);
-                    else
+                    if((int)image.getTag()!=-1){
                         image.setSelected(true);
+                        carteRetourne++;
+                        if(carteRetourne == 1) premiere_carte_paire = image;
+                        else if(carteRetourne == 2)deuxieme_carte_paire = image;
+                        else if(carteRetourne == 3){
+                            Object id1 = premiere_carte_paire.getTag();
+                            Object id2 = deuxieme_carte_paire.getTag();
+
+                            if(id1 == id2) {
+                                pairesTrouvees++;
+                                //On ne peut plus retourner les cartes
+                                premiere_carte_paire.setTag(-1);
+                                deuxieme_carte_paire.setTag(-1);
+                                if(pairesTrouvees == pairesTotales){
+                                    //TODO : aller sur la page de résultats
+                                }
+                            }
+                            else{
+                                premiere_carte_paire.setSelected(false);
+                                deuxieme_carte_paire.setSelected(false);
+                            }
+                            carteRetourne = 1;
+                            premiere_carte_paire = image;
+                        }
+                    }
+
                 }
             });
         }
         Collections.shuffle(cartes);
+
         table.setAdapter(new CarteAdapter(this, cartes));
     }
 
