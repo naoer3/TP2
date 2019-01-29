@@ -11,4 +11,8 @@
     <string name="zen">Zen</string>
     <string name="normal">Normal</string>
     <string name="contre_la_montre">Contre-la-montre</string>
+    <string name="place">Place</string>
+    <string name="nom">Nom</string>
+    <string name="temps">Temps</string>
+    <string name="nombre_de_coups">Nombre de coups</string>
 </resources>

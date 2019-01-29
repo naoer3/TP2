@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                mode_jeu = checkedId;
+                mode_jeu = group.indexOfChild(group.findViewById(checkedId));
             }
         });
         BuildChoixFonds();
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         getPref();
+        // TODO dans le OnStart ou dans le OnCreate ?
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("NAME",name_user);
                 editor.putInt("NB_CARTES", nb_cartes);
-                editor.putInt("MODEJEU",mode_jeu);
+                editor.putInt("MODEJEU", mode_jeu);
                 editor.putInt("SELECTED_FOND", selected_fond);
                 editor.putInt("SELECTED_THEME", selected_theme);
                 editor.apply();
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         String name_user = prefs.getString("NAME", null);
         nb_cartes = prefs.getInt("NB_CARTES",3);
         mode_jeu = prefs.getInt("MODEJEU",R.id.rbnormal);
-        group.check(mode_jeu);
+        group.check(group.getChildAt(mode_jeu).getId());
         editName.setText(name_user);
         valeurnbcartes.setText(String.valueOf(nb_cartes));
         seeknbcartes.setProgress(nb_cartes - 3);
