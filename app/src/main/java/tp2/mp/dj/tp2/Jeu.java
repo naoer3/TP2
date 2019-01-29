@@ -99,9 +99,9 @@ public class Jeu extends AppCompatActivity {
                                 //On ne peut plus retourner les cartes
                                 premiere_carte_paire.setTag(-1);
                                 deuxieme_carte_paire.setTag(-1);
-                                if(pairesTrouvees == pairesTotales){
+                                /*if(pairesTrouvees == pairesTotales){
                                     //TODO : aller sur la page de résultats
-                                }
+                                }*/
                             }
                             else{
                                 premiere_carte_paire.setSelected(false);
