@@ -42,6 +42,7 @@ public class Jeu extends AppCompatActivity {
         super.onStart();
 
         List<Integer> jeu = new ArrayList<>();
+        List<Integer> carte = new ArrayList<>();
 
         int nb_carte_totale = prefs.getInt("NB_CARTES",8) * 2;
 
@@ -63,15 +64,13 @@ public class Jeu extends AppCompatActivity {
 
         Collections.shuffle(jeu);
 
-        for(int j=0; j<nb_carte_totale; j++) {
-            Bundle bd = new Bundle();
-            Carte carte = new Carte();
-            bd.putString("avant", avant);
-            bd.putInt("fond", arriere);
-            bd.putInt("id", jeu.get(j));
-            carte.setArguments(bd);
-            getSupportFragmentManager().beginTransaction().add(R.id.jeu_cartes,carte).commit();
+        for(int j=0; j<jeu.size(); j++) {
+            carte.add(getResources().getIdentifier(avant + jeu.get(j),"drawable",getPackageName()));
         }
+
+        Collections.shuffle(carte);
+
+        table.setAdapter(new CarteAdapter(this, carte));
     }
 
     @Override
