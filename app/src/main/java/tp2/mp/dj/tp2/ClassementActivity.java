@@ -20,15 +20,13 @@ public class ClassementActivity extends AppCompatActivity {
     private SimpleFragmentPagerAdapter adapter;
     private Toolbar toolbar = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classement);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar_settings);
+        toolbar = (Toolbar)findViewById(R.id.toolbar_classement);
         if(toolbar != null) setSupportActionBar(toolbar);
     }
 
@@ -39,8 +37,7 @@ public class ClassementActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(adapter.getCount()-1);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-
+        // TODO régler l'affichage sur le classement demandé si on vient de gagner (passage dans un intent)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String classement_modif = prefs.getString("CLASSEMENT_CLM", null);
     }

@@ -86,18 +86,22 @@ public class MainActivity extends AppCompatActivity {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name_user = editName.getText().toString();
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("NAME",name_user);
-                editor.putInt("NB_CARTES", nb_cartes);
-                editor.putInt("MODEJEU", mode_jeu);
-                editor.putInt("FOND", selected_fond);
-                String theme = themes.get(selected_theme);
-                editor.putString("THEME", theme);
-                editor.apply();
+                SavePreferences();
             }
         });
+    }
+
+    private void SavePreferences() {
+        String name_user = editName.getText().toString();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("NAME",name_user);
+        editor.putInt("NB_CARTES", nb_cartes);
+        editor.putInt("MODEJEU", mode_jeu);
+        editor.putInt("FOND", selected_fond);
+        String theme = themes.get(selected_theme);
+        editor.putString("THEME", theme);
+        editor.apply();
     }
 
     private void getPref() {
@@ -178,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;
+        SavePreferences();
         switch (item.getItemId()){
             case R.id.action_rank :
                 intent = new Intent(MainActivity.this, ClassementActivity.class);

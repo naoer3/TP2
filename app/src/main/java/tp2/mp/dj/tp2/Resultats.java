@@ -17,7 +17,6 @@ public class Resultats extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats);
-
         btn_classement = (ImageButton)findViewById(R.id.button_recommencer);
         btn_recommencer = (ImageButton)findViewById(R.id.button_classement2);
         image = (ImageView)findViewById(R.id.image_resultats);
@@ -28,13 +27,10 @@ public class Resultats extends AppCompatActivity implements View.OnClickListener
         super.onStart();
         btn_recommencer.setOnClickListener(this);
         btn_classement.setOnClickListener(this);
-
         boolean resultats = true;
-
         Intent intent = getIntent();
         if(intent != null) resultats = intent.getBooleanExtra("RESULTATS",true);
         if(!resultats) image.setImageResource(R.drawable.perdu);
-
     }
 
     @Override
