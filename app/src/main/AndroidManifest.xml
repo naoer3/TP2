@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ClassementActivity" />
         <activity android:name=".TESTActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Jeu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Jeu" />
         <activity android:name=".Resultats"></activity>
     </application>
 
