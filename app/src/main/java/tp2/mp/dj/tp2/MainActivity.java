@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO radio group en dynamique ou en dur ??
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editName = (EditText) findViewById(R.id.name);
@@ -136,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO à refaire un peu plus propre quand tout marchera
                     for (int i = 0 ; i<tableRow_fonds.getVirtualChildCount(); i++) {
                         tableRow_fonds.getVirtualChildAt(i).setSelected(false);
                         if(v.equals(tableRow_fonds.getVirtualChildAt(i))){

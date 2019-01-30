@@ -17,13 +17,11 @@
         android:layout_marginBottom="50dp"
         app:srcCompat="@drawable/gagne" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button_recommencer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:width="150dp"
-        android:text="Recommencer" />
+        app:srcCompat="@drawable/recommencer" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,13 +29,11 @@
         android:layout_weight="10"
         android:orientation="vertical">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_classement2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:width="150dp"
-            android:text="Classement" />
+            app:srcCompat="@drawable/classement" />
     </LinearLayout>
 
 </LinearLayout>

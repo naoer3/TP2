@@ -163,7 +163,6 @@ public class Jeu extends AppCompatActivity {
                                             temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
                                             AjoutClassement(getTempsClm() - temps, 2);
                                             break;
-
                                     }
                                     Intent intent = new Intent(Jeu.this, Resultats.class);
                                     intent.putExtra("RESULTATS", true);

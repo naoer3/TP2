@@ -28,6 +28,7 @@ public class TESTActivity extends AppCompatActivity {
     private int mode_jeu;
     private Button valider = null;
 
+    //TODO : a supprimer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,6 @@ public class TESTActivity extends AppCompatActivity {
                         }
                     }
                     list_classement.add(joueur);
-                    // TODO min sdk = 24! Avant 21 !
                     list_classement.sort(new Comparator<Joueur>() {
                         @Override
                         public int compare(Joueur j1, Joueur j2) {
