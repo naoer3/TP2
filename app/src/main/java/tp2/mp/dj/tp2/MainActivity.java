@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 String theme = themes.get(selected_theme);
                 editor.putString("THEME", theme);
                 editor.apply();
-                // TODO Envoyer le mode de jeu + fond + theme
             }
         });
     }

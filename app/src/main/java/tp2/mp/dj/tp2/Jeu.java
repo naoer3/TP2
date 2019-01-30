@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +30,8 @@ public class Jeu extends AppCompatActivity {
 
     private View premiere_carte_paire = null;
     private View deuxieme_carte_paire = null;
+
+    private Chrono chrono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class Jeu extends AppCompatActivity {
             carte.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View image) {
-                    if((int)image.getTag()!=-1){
+                    if((int)image.getTag()!=-1 && !image.isSelected()){
                         image.setSelected(true);
                         carteRetourne++;
                         if(carteRetourne == 1) premiere_carte_paire = image;
@@ -100,6 +101,7 @@ public class Jeu extends AppCompatActivity {
                                 premiere_carte_paire.setTag(-1);
                                 deuxieme_carte_paire.setTag(-1);
                                 if(pairesTrouvees == pairesTotales){
+                                    //chrono.cancel(true);
                                     //TODO : aller sur la page de résultats
                                 }
                             }
@@ -118,6 +120,8 @@ public class Jeu extends AppCompatActivity {
         Collections.shuffle(cartes);
 
         table.setAdapter(new CarteAdapter(this, cartes));
+        //chrono = new Chrono();
+        //chrono.execute();
     }
 
     @Override
@@ -131,10 +135,10 @@ public class Jeu extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.action_pause :
-                //a faire
+                // TODO
                 return true;
             case R.id.action_rank :
-                //a faire
+                // TODO
                 return true;
             case R.id.action_settings :
                 intent = new Intent(Jeu.this, MainActivity.class);
