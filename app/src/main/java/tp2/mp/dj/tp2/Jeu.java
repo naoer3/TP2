@@ -148,11 +148,22 @@ public class Jeu extends AppCompatActivity {
                                 if (pairesTrouvees == pairesTotales) {
                                     if (chrono != null)
                                         chrono.cancel(true);
-                                    String[] parts = score.getText().toString().split("[^\\d]+");
-                                    Integer temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
+                                    String[] parts;
+                                    Integer temps;
                                     switch (mode) {
                                         case 0: // mode Zen
                                             AjoutClassement(nbCoups, 0);
+                                        case 1: // mode Normal
+                                            parts = score.getText().toString().split("[^\\d]+");
+                                            temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
+                                            AjoutClassement(temps, 1);
+                                            break;
+                                        case 2: // mode Contre-la-montre
+                                            parts = score.getText().toString().split("[^\\d]+");
+                                            temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
+                                            AjoutClassement(getTempsClm() - temps, 2);
+                                            break;
+
                                     }
                                     Intent intent = new Intent(Jeu.this, Resultats.class);
                                     intent.putExtra("RESULTATS", true);
@@ -200,7 +211,8 @@ public class Jeu extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_rank:
-                // TODO
+                intent = new Intent(Jeu.this, ClassementActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_settings:
                 intent = new Intent(Jeu.this, MainActivity.class);
@@ -218,7 +230,7 @@ public class Jeu extends AppCompatActivity {
 
         public Chrono(boolean clm) {
             if (clm)
-                temps_clm = 10 * pairesTotales;
+                temps_clm = getTempsClm();
         }
 
         @Override
@@ -261,5 +273,9 @@ public class Jeu extends AppCompatActivity {
         String nom = prefs.getString("NAME", "joueur");
         String score = Integer.toString(score_int);
         tc.run(new Joueur(nom, score), mode);
+    }
+
+    private int getTempsClm(){
+        return 10 * pairesTotales;
     }
 }
