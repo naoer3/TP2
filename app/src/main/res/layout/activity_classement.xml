@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackGround"
-    android:orientation="vertical"
-    tools:context=".ClassementActivity">
+    tools:context=".ClassementActivity"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonback"
