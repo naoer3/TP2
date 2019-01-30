@@ -103,6 +103,11 @@ public class Jeu extends AppCompatActivity {
                                 if(pairesTrouvees == pairesTotales){
                                     //chrono.cancel(true);
                                     //TODO : aller sur la page de résultats
+
+                                    Intent intent = new Intent(Jeu.this, Resultats.class);
+                                    intent.putExtra("RESULTATS","GAGNÉ");
+                                    startActivity(intent);
+
                                 }
                             }
                             else{
