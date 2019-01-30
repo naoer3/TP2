@@ -56,7 +56,7 @@ public class Jeu extends AppCompatActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        score = (TextView) findViewById(R.id.text_time);
+        score = (TextView) findViewById(R.id.score);
     }
 
     @Override
@@ -209,34 +209,34 @@ public class Jeu extends AppCompatActivity {
         private DecimalFormat df = new DecimalFormat("00");
         private int temps_clm = 0;
 
-        public Chrono(boolean clm){
-            if(clm)
+        public Chrono(boolean clm) {
+            if (clm)
                 temps_clm = 10 * pairesTotales;
         }
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             start = Calendar.getInstance().getTime();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            while(!this.isCancelled()) {
-                Date now =  Calendar.getInstance().getTime();
-                long intervalle = now.getTime()-start.getTime();
+            while (!this.isCancelled()) {
+                Date now = Calendar.getInstance().getTime();
+                long intervalle = now.getTime() - start.getTime();
                 Integer temps;
-                if(temps_clm!=0)
-                    temps =temps_clm - (int) intervalle / 1000;
-                        else
-                    temps =(int) intervalle / 1000;
+                if (temps_clm != 0)
+                    temps = temps_clm - (int) intervalle / 1000;
+                else
+                    temps = (int) intervalle / 1000;
                 System.out.println(temps);
                 final int minutes = temps / 60;
-                final int secondes = temps - (minutes*60);
+                final int secondes = temps - (minutes * 60);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
-                        score.setText(df.format(minutes)+":"+df.format(secondes));
+                        score.setText(df.format(minutes) + ":" + df.format(secondes));
 
                     }
                 });
@@ -249,6 +249,7 @@ public class Jeu extends AppCompatActivity {
             }
             return null;
         }
+    }
 
     private void AjoutClassement(int score_int, int mode){
         TraitementClassement tc = new TraitementClassement(prefs);
