@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/launcher_mem_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ClassementActivity"></activity>
-        <activity android:name=".TESTActivity">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ClassementActivity" />
+        <activity android:name=".TESTActivity"></activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Jeu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Jeu"></activity>
+        <activity android:name=".Resultats"></activity>
     </application>
 
 </manifest>
