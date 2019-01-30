@@ -50,7 +50,7 @@ public class ClassementNormal extends Fragment {
                     nom.setLayoutParams(new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,1));
                     TextView score = new TextView(getActivity());
                     score.setLayoutParams(new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,1));
-                    place.setText(String.valueOf(i));
+                    place.setText(String.valueOf(i+1));
                     place.setTextSize(18);
                     nom.setText(joueur.getName());
                     nom.setTextSize(18);

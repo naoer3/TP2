@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,8 +49,7 @@ public class TraitementClassement {
             }
         }
         list_classement.add(j);
-        // TODO min sdk = 24! Avant 21 !
-        list_classement.sort(new Comparator<Joueur>() {
+        Collections.sort(list_classement,new Comparator<Joueur>() {
             @Override
             public int compare(Joueur j1, Joueur j2) {
                 return Integer.valueOf(j1.score).compareTo(Integer.valueOf(j2.score));
