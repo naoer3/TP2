@@ -9,7 +9,7 @@
     tools:context=".Resultats">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txt_gagne_perdu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="12"
@@ -19,7 +19,7 @@
         android:textSize="36sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_recommencer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -33,7 +33,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_classement2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
