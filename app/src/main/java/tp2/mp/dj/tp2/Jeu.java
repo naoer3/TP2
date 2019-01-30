@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -100,7 +99,9 @@ public class Jeu extends AppCompatActivity {
                                 premiere_carte_paire.setTag(-1);
                                 deuxieme_carte_paire.setTag(-1);
                                 if(pairesTrouvees == pairesTotales){
-                                    //TODO : aller sur la page de résultats
+                                    Intent intent = new Intent(Jeu.this, Resultats.class);
+                                    intent.putExtra("RESULTATS","GAGNÉ");
+                                    startActivity(intent);
                                 }
                             }
                             else{
