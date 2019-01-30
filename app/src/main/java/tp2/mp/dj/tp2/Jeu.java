@@ -153,6 +153,13 @@ public class Jeu extends AppCompatActivity {
                                     switch (mode) {
                                         case 0: // mode Zen
                                             AjoutClassement(nbCoups, 0);
+                                            break;
+                                        case 1 : // mode normal
+                                            break;
+                                        case 2 : // mode contre la montre
+                                            break;
+
+
                                     }
                                     Intent intent = new Intent(Jeu.this, Resultats.class);
                                     intent.putExtra("RESULTATS", true);
@@ -200,7 +207,8 @@ public class Jeu extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.action_rank:
-                // TODO
+                intent = new Intent(Jeu.this, ClassementActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_settings:
                 intent = new Intent(Jeu.this, MainActivity.class);

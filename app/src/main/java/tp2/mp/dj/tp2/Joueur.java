@@ -54,10 +54,8 @@ public class Joueur {
     public String getScoreTemps() {
 
         Integer temps = Integer.valueOf(score);
-        // TODO : on n'autorise pas plus d'une heure de temps passé sur le jeu ?
         int minutes = temps / 60;
         int secondes = temps - (minutes*60);
-        // TODO : rajout d'un zéro avant
         DecimalFormat df = new DecimalFormat("00");
         return df.format(minutes)+":"+df.format(secondes);
     }

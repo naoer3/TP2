@@ -55,8 +55,9 @@ public class ClassementActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;
         switch (item.getItemId()){
-            case R.id.action_rank :
-                // TODO
+            case R.id.action_settings :
+                intent = new Intent(ClassementActivity.this, MainActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_game :
                 intent = new Intent(ClassementActivity.this, Jeu.class);
