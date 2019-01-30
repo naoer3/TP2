@@ -5,22 +5,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Resultats extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView texte = null;
     private Button btn_recommencer = null;
     private Button btn_classement = null;
+    private ImageView image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats);
 
-        texte = (TextView) findViewById(R.id.txt_gagne_perdu);
         btn_classement = (Button)findViewById(R.id.button_recommencer);
         btn_recommencer = (Button)findViewById(R.id.button_classement2);
+        image = (ImageView)findViewById(R.id.image_resultats);
     }
 
     @Override
@@ -29,8 +33,12 @@ public class Resultats extends AppCompatActivity implements View.OnClickListener
         btn_recommencer.setOnClickListener(this);
         btn_classement.setOnClickListener(this);
 
+        boolean resultats = true;
+
         Intent intent = getIntent();
-        if(intent != null) texte.setText(intent.getStringExtra("RESULTATS"));
+        if(intent != null) resultats = intent.getBooleanExtra("RESULTATS",true);
+        if(!resultats) image.setImageResource(R.drawable.perdu);
+
     }
 
     @Override

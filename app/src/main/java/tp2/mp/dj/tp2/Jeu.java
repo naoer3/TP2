@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +29,7 @@ public class Jeu extends AppCompatActivity {
     private int carteRetourne = 0;
     private int pairesTrouvees = 0;
     private int pairesTotales = 0;
+    private int nbCoups = 0;
 
     private View premiere_carte_paire = null;
     private View deuxieme_carte_paire = null;
@@ -86,39 +89,45 @@ public class Jeu extends AppCompatActivity {
             carte.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View image) {
-                    if((int)image.getTag()!=-1 && !image.isSelected()){
-                        image.setSelected(true);
-                        carteRetourne++;
-                        if(carteRetourne == 1) premiere_carte_paire = image;
-                        else if(carteRetourne == 2)deuxieme_carte_paire = image;
-                        else if(carteRetourne == 3){
-                            Object id1 = premiere_carte_paire.getTag();
-                            Object id2 = deuxieme_carte_paire.getTag();
+                if((int)image.getTag()!=-1 && !image.isSelected()){
+                    image.setSelected(true);
+                    carteRetourne++;
+                    if(carteRetourne == 1) premiere_carte_paire = image;
+                    else if(carteRetourne == 2){
+                        deuxieme_carte_paire = image;
+                        Object id1 = premiere_carte_paire.getTag();
+                        Object id2 = deuxieme_carte_paire.getTag();
 
-                            if(id1 == id2) {
-                                pairesTrouvees++;
-                                //On ne peut plus retourner les cartes
-                                premiere_carte_paire.setTag(-1);
-                                deuxieme_carte_paire.setTag(-1);
-                                if(pairesTrouvees == pairesTotales){
-                                    //chrono.cancel(true);
-                                    //TODO : aller sur la page de résultats
-
-                                    Intent intent = new Intent(Jeu.this, Resultats.class);
-                                    intent.putExtra("RESULTATS","GAGNÉ");
-                                    startActivity(intent);
-
+                        if(id1 == id2) {
+                            pairesTrouvees++;
+                            premiere_carte_paire.setTag(-1);
+                            deuxieme_carte_paire.setTag(-1);
+                            if(pairesTrouvees == pairesTotales){
+                                //chrono.cancel(true);
+                                int mode = prefs.getInt("MODEJEU",0);
+                                switch (mode){
+                                    case 0 : //mode Zen
+                                        AjoutClassement(nbCoups,0);
                                 }
+                                Intent intent = new Intent(Jeu.this, Resultats.class);
+                                intent.putExtra("RESULTATS",true);
+                                startActivity(intent);
                             }
-                            else{
-                                premiere_carte_paire.setSelected(false);
-                                deuxieme_carte_paire.setSelected(false);
-                            }
-                            carteRetourne = 1;
-                            premiere_carte_paire = image;
                         }
+                        nbCoups++;
                     }
+                    else if(carteRetourne == 3){
+                        Object id1 = premiere_carte_paire.getTag();
+                        Object id2 = deuxieme_carte_paire.getTag();
 
+                        if(id1 != id2) {
+                            premiere_carte_paire.setSelected(false);
+                            deuxieme_carte_paire.setSelected(false);
+                        }
+                        carteRetourne = 1;
+                        premiere_carte_paire = image;
+                    }
+                }
                 }
             });
         }
@@ -151,5 +160,12 @@ public class Jeu extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void AjoutClassement(int score_int, int mode){
+        TraitementClassement tc = new TraitementClassement(prefs);
+        String nom = prefs.getString("NAME","joueur");
+        String score = Integer.toString(score_int);
+        tc.run(new Joueur(nom,score),mode);
     }
 }
