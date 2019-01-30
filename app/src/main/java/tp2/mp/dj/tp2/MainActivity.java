@@ -57,12 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
         validate = (Button) findViewById(R.id.validate);
@@ -185,9 +183,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;
         switch (item.getItemId()){
-            case R.id.action_pause :
-                // TODO
-                return true;
             case R.id.action_rank :
                 // TODO
                 return true;

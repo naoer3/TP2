@@ -15,7 +15,6 @@ import android.widget.Button;
 
 public class ClassementActivity extends AppCompatActivity {
 
-    private Button btn_back = null;
     private ViewPager viewPager = null;
     private TabLayout tabLayout = null;
     private SimpleFragmentPagerAdapter adapter;
@@ -26,15 +25,6 @@ public class ClassementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classement);
-        btn_back = findViewById(R.id.buttonback);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activity;
-                activity = new Intent(ClassementActivity.this,TESTActivity.class);
-                startActivity(activity);
-            }
-        });
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
 
@@ -65,9 +55,6 @@ public class ClassementActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;
         switch (item.getItemId()){
-            case R.id.action_pause :
-                // TODO
-                return true;
             case R.id.action_rank :
                 // TODO
                 return true;
