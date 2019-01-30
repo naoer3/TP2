@@ -16,9 +16,4 @@
         android:icon="@drawable/rank"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"/>
-    <item android:title="Pause"
-        android:id="@+id/action_pause"
-        android:icon="@drawable/pause"
-        android:orderInCategory="4"
-        app:showAsAction="ifRoom"/>
 </menu>

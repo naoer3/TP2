@@ -43,14 +43,15 @@ public class Jeu extends AppCompatActivity {
 
     private Chrono chrono = null;
     private TextView score = null;
+    private int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar_jeu);
-        if(toolbar != null) setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_jeu);
+        if (toolbar != null) setSupportActionBar(toolbar);
 
         table = (GridView) findViewById(R.id.jeu_cartes);
 
@@ -60,7 +61,7 @@ public class Jeu extends AppCompatActivity {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         score.addTextChangedListener(new TextWatcher() {
@@ -74,31 +75,42 @@ public class Jeu extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*System.out.println(s);
-                String[] parts = s.toString().split("[^\\d]+");
-                Integer temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);*/
+                if(s.toString().matches("00:00") && mode == 2 /* Mode contre-la-montre*/){
+                    Intent intent = new Intent(Jeu.this, Resultats.class);
+                    intent.putExtra("RESULTATS", false);
+                    startActivity(intent);
+                }
             }
         });
 
         List<Integer> jeu = new ArrayList<>();
         List<ImageView> cartes = new ArrayList<>();
 
-        pairesTotales = prefs.getInt("NB_CARTES",8);
+        pairesTotales = prefs.getInt("NB_CARTES", 8);
 
-        String avant = prefs.getString("THEME","chaton");
-        int arriere = prefs.getInt("FOND",0);
+        String avant = prefs.getString("THEME", "chaton");
+        int arriere = prefs.getInt("FOND", 0);
+        mode = prefs.getInt("MODEJEU", 0);
 
-        // TODO
-        //chrono = new Chrono();
+        switch (mode) {
+            case 0: // Zen
+                break;
+            case 1: // Normal
+                chrono = new Chrono(false);
+                break;
+            case 2: // Contre-la-montre
+                chrono = new Chrono(true);
+                break;
+        }
 
         List<Integer> numero = new ArrayList<>();
-        for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             numero.add(i);
         }
 
         Collections.shuffle(numero);
 
-        for (int i=0;i < pairesTotales; i++){
+        for (int i = 0; i < pairesTotales; i++) {
             jeu.add(numero.get(0));
             jeu.add(numero.get(0));
             numero.remove(0);
@@ -106,13 +118,13 @@ public class Jeu extends AppCompatActivity {
 
         Collections.shuffle(jeu);
 
-        for(int j=0; j<jeu.size(); j++) {
+        for (int j = 0; j < jeu.size(); j++) {
             final ImageView carte = new ImageView(this);
             StateListDrawable states = new StateListDrawable();
-            states.addState(new int[] {android.R.attr.state_selected},
-                    getResources().getDrawable(getResources().getIdentifier(avant + jeu.get(j),"drawable",getPackageName())));
-            states.addState(new int[] {-android.R.attr.state_selected},
-                    getResources().getDrawable(getResources().getIdentifier("fond"+arriere,"drawable",getPackageName())));
+            states.addState(new int[]{android.R.attr.state_selected},
+                    getResources().getDrawable(getResources().getIdentifier(avant + jeu.get(j), "drawable", getPackageName())));
+            states.addState(new int[]{-android.R.attr.state_selected},
+                    getResources().getDrawable(getResources().getIdentifier("fond" + arriere, "drawable", getPackageName())));
             carte.setImageDrawable(states);
             carte.setTag(jeu.get(j));
             cartes.add(carte);
@@ -120,82 +132,77 @@ public class Jeu extends AppCompatActivity {
                 @Override
                 public void onClick(View image) {
 
-                if((int)image.getTag()!=-1 && !image.isSelected()){
-                    image.setSelected(true);
-                    carteRetourne++;
-                    if(carteRetourne == 1) premiere_carte_paire = image;
-                    else if(carteRetourne == 2){
-                        deuxieme_carte_paire = image;
-                        Object id1 = premiere_carte_paire.getTag();
-                        Object id2 = deuxieme_carte_paire.getTag();
+                    if ((int) image.getTag() != -1 && !image.isSelected()) {
+                        image.setSelected(true);
+                        carteRetourne++;
+                        if (carteRetourne == 1) premiere_carte_paire = image;
+                        else if (carteRetourne == 2) {
+                            deuxieme_carte_paire = image;
+                            Object id1 = premiere_carte_paire.getTag();
+                            Object id2 = deuxieme_carte_paire.getTag();
 
-                        if(id1 == id2) {
-                            pairesTrouvees++;
-                            premiere_carte_paire.setTag(-1);
-                            deuxieme_carte_paire.setTag(-1);
-                            if(pairesTrouvees == pairesTotales){
-                                //chrono.cancel(true);
-                                     if(chrono != null)
+                            if (id1 == id2) {
+                                pairesTrouvees++;
+                                premiere_carte_paire.setTag(-1);
+                                deuxieme_carte_paire.setTag(-1);
+                                if (pairesTrouvees == pairesTotales) {
+                                    if (chrono != null)
                                         chrono.cancel(true);
-                                                                  String[] parts = score.getText().toString().split("[^\\d]+");
+                                    String[] parts = score.getText().toString().split("[^\\d]+");
                                     Integer temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
-                                int mode = prefs.getInt("MODEJEU",0);
-                                switch (mode){
-                                    case 0 : //mode Zen
-                                        AjoutClassement(nbCoups,0);
+                                    switch (mode) {
+                                        case 0: // mode Zen
+                                            AjoutClassement(nbCoups, 0);
+                                    }
+                                    Intent intent = new Intent(Jeu.this, Resultats.class);
+                                    intent.putExtra("RESULTATS", true);
+                                    startActivity(intent);
                                 }
-                                Intent intent = new Intent(Jeu.this, Resultats.class);
-                                intent.putExtra("RESULTATS",true);
-                                startActivity(intent);
                             }
-                        }
-                        nbCoups++;
-                    }
-                    else if(carteRetourne == 3){
-                        Object id1 = premiere_carte_paire.getTag();
-                        Object id2 = deuxieme_carte_paire.getTag();
+                            nbCoups++;
+                        } else if (carteRetourne == 3) {
+                            Object id1 = premiere_carte_paire.getTag();
+                            Object id2 = deuxieme_carte_paire.getTag();
 
-                        if(id1 != id2) {
-                            premiere_carte_paire.setSelected(false);
-                            deuxieme_carte_paire.setSelected(false);
+                            if (id1 != id2) {
+                                premiere_carte_paire.setSelected(false);
+                                deuxieme_carte_paire.setSelected(false);
+                            }
+                            carteRetourne = 1;
+                            premiere_carte_paire = image;
                         }
-                        carteRetourne = 1;
-                        premiere_carte_paire = image;
                     }
-                }
                 }
             });
         }
         Collections.shuffle(cartes);
 
         table.setAdapter(new CarteAdapter(this, cartes));
-        chrono.execute();
+        if (chrono != null)
+            chrono.execute();
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        if(chrono != null)
+        if (chrono != null)
             chrono.cancel(true);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.toolbar,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch (item.getItemId()){
-            case R.id.action_pause :
+        switch (item.getItemId()) {
+            case R.id.action_rank:
                 // TODO
                 return true;
-            case R.id.action_rank :
-                // TODO
-                return true;
-            case R.id.action_settings :
+            case R.id.action_settings:
                 intent = new Intent(Jeu.this, MainActivity.class);
                 startActivity(intent);
                 return true;
@@ -235,9 +242,7 @@ public class Jeu extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         score.setText(df.format(minutes) + ":" + df.format(secondes));
-
                     }
                 });
                 System.out.println("TEST");
@@ -251,10 +256,10 @@ public class Jeu extends AppCompatActivity {
         }
     }
 
-    private void AjoutClassement(int score_int, int mode){
+    private void AjoutClassement(int score_int, int mode) {
         TraitementClassement tc = new TraitementClassement(prefs);
-        String nom = prefs.getString("NAME","joueur");
+        String nom = prefs.getString("NAME", "joueur");
         String score = Integer.toString(score_int);
-        tc.run(new Joueur(nom,score),mode);
+        tc.run(new Joueur(nom, score), mode);
     }
 }
