@@ -84,22 +84,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         getPref();
-        // TODO dans le OnStart ou dans le OnCreate ?
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name_user = editName.getText().toString();
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("NAME",name_user);
-                editor.putInt("NB_CARTES", nb_cartes);
-                editor.putInt("MODEJEU", mode_jeu);
-                editor.putInt("FOND", selected_fond);
-                String theme = themes.get(selected_theme);
-                editor.putString("THEME", theme);
-                editor.apply();
+                SavePreferences();
             }
         });
+    }
+
+    private void SavePreferences() {
+        String name_user = editName.getText().toString();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("NAME",name_user);
+        editor.putInt("NB_CARTES", nb_cartes);
+        editor.putInt("MODEJEU", mode_jeu);
+        editor.putInt("FOND", selected_fond);
+        String theme = themes.get(selected_theme);
+        editor.putString("THEME", theme);
+        editor.apply();
     }
 
     private void getPref() {
@@ -114,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         selected_fond = prefs.getInt("FOND", 0);
         tableRow_fonds.getVirtualChildAt(selected_fond).setSelected(true);
         String theme = prefs.getString("THEME", "chatons");
-        // TODO optimiser la recherche
         for (int i = 0; i<themes.size();i++){
             if(theme.matches(themes.get(i)))
                 selected_theme = i;
@@ -182,9 +184,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;
+        SavePreferences();
         switch (item.getItemId()){
             case R.id.action_rank :
-                // TODO
+                intent = new Intent(MainActivity.this, ClassementActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_game :
                 intent = new Intent(MainActivity.this, Jeu.class);
