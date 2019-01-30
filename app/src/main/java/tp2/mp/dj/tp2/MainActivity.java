@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPref() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String name_user = prefs.getString("NAME", null);
+        String name_user = prefs.getString("NAME", "Joueur");
         nb_cartes = prefs.getInt("NB_CARTES",3);
         mode_jeu = prefs.getInt("MODEJEU",0);
         group.check(group.getChildAt(mode_jeu).getId());
@@ -186,10 +186,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.action_pause :
-                //a faire
+                // TODO
                 return true;
             case R.id.action_rank :
-                //a faire
+                // TODO
                 return true;
             case R.id.action_game :
                 intent = new Intent(MainActivity.this, Jeu.class);
