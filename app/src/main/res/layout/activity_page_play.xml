@@ -17,6 +17,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/ribeye_marrow"
         android:gravity="center"
+        android:paddingBottom="20dp"
         android:text="Memory"
         android:textColor="@android:color/background_light"
         android:textSize="70sp" />
