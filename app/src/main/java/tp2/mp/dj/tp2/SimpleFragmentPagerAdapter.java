@@ -1,6 +1,7 @@
 package tp2.mp.dj.tp2;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,12 +18,12 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0: return new ClassementZen();
-            case 1: return new ClassementNormal();
-            case 2: return new ClassementContreLaMontre();
-            default: return  null;
-        }
+        // On envoie au fragment le mode de jeu qu'il va représenter
+        ClassementFragment fragmentClassement = new ClassementFragment();
+        Bundle args = new Bundle();
+        args.putInt("MODE", position);
+        fragmentClassement.setArguments(args);
+        return fragmentClassement;
     }
 
     @Override
@@ -34,10 +35,14 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
 
         switch (position) {
-            case 0: return context.getResources().getString(R.string.zen);
-            case 1: return context.getResources().getString(R.string.normal);
-            case 2: return context.getResources().getString(R.string.contre_la_montre);
-            default: return null;
+            case 0:
+                return context.getResources().getString(R.string.zen);
+            case 1:
+                return context.getResources().getString(R.string.normal);
+            case 2:
+                return context.getResources().getString(R.string.contre_la_montre);
+            default:
+                return null;
         }
     }
 }

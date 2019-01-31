@@ -76,7 +76,7 @@ public class Jeu extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().matches("00:00") && mode == 2 /* Mode contre-la-montre*/){
+                if (s.toString().matches("00:00") && mode == 2 /* Mode contre-la-montre*/) {
                     Intent intent = new Intent(Jeu.this, Resultats.class);
                     intent.putExtra("RESULTATS", false);
                     startActivity(intent);
@@ -276,7 +276,11 @@ public class Jeu extends AppCompatActivity {
         tc.run(new Joueur(nom, score), mode);
     }
 
-    private int getTempsClm(){
+    private int getTempsClm() {
         return 10 * pairesTotales;
+    }
+
+    // Permet d'annuler toute action suite au bouton physique "back"
+    public void onBackPressed() {
     }
 }

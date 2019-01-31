@@ -15,11 +15,11 @@ public class PagePlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_play);
 
-        btn_play = (ImageView)findViewById(R.id.btn_play);
+        btn_play = (ImageView) findViewById(R.id.btn_play);
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         btn_play.setOnClickListener(new View.OnClickListener() {

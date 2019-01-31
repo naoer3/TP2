@@ -16,13 +16,13 @@ public class TraitementClassement {
 
     SharedPreferences prefs = null;
 
-    public TraitementClassement(SharedPreferences p){
+    public TraitementClassement(SharedPreferences p) {
         prefs = p;
     }
 
-    public void run(Joueur j, int mode){
+    public void run(Joueur j, int mode) {
         String nom_prefs = "";
-        switch(mode){
+        switch (mode) {
             case 0:
                 nom_prefs = "CLASSEMENT_ZEN";
                 break;
@@ -35,34 +35,33 @@ public class TraitementClassement {
         }
         String classement_modif = prefs.getString(nom_prefs, null);
         List<Joueur> list_classement = new ArrayList<>();
-        if(classement_modif != null) {
+        if (classement_modif != null) {
             try {
                 JSONArray json_joueurs = new JSONArray(classement_modif);
-                for (int i =0; i<json_joueurs.length(); i++){
+                for (int i = 0; i < json_joueurs.length(); i++) {
                     Joueur njoueur = new Joueur();
                     njoueur.fromJson(json_joueurs.getJSONObject(i));
                     list_classement.add(njoueur);
                 }
-            }
-            catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         list_classement.add(j);
-        Collections.sort(list_classement,new Comparator<Joueur>() {
+        Collections.sort(list_classement, new Comparator<Joueur>() {
             @Override
             public int compare(Joueur j1, Joueur j2) {
                 return Integer.valueOf(j1.score).compareTo(Integer.valueOf(j2.score));
             }
         });
-        if(list_classement.size()>5)
-            list_classement = list_classement.subList(0,5);
+        if (list_classement.size() > 5)
+            list_classement = list_classement.subList(0, 5);
         JSONArray json_joueurs_nouveaux = new JSONArray();
-        for (Joueur joueur :list_classement) {
+        for (Joueur joueur : list_classement) {
             json_joueurs_nouveaux.put(joueur.toJson());
         }
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(nom_prefs,json_joueurs_nouveaux.toString());
+        editor.putString(nom_prefs, json_joueurs_nouveaux.toString());
         editor.apply();
     }
 }

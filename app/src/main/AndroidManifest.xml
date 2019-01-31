@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ClassementActivity" />
-        <activity android:name=".TESTActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Jeu"/>
         <activity android:name=".Resultats" />
