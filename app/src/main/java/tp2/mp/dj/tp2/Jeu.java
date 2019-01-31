@@ -94,6 +94,7 @@ public class Jeu extends AppCompatActivity {
 
         switch (mode) {
             case 0: // Zen
+                score.setText(String.valueOf(nbCoups));
                 break;
             case 1: // Normal
                 chrono = new Chrono(false);
@@ -133,6 +134,7 @@ public class Jeu extends AppCompatActivity {
                 public void onClick(View image) {
 
                     if ((int) image.getTag() != -1 && !image.isSelected()) {
+                        nbCoups++;
                         image.setSelected(true);
                         carteRetourne++;
                         if (carteRetourne == 1) premiere_carte_paire = image;
@@ -153,6 +155,7 @@ public class Jeu extends AppCompatActivity {
                                     switch (mode) {
                                         case 0: // mode Zen
                                             AjoutClassement(nbCoups, 0);
+                                            break;
                                         case 1: // mode Normal
                                             parts = score.getText().toString().split("[^\\d]+");
                                             temps = Integer.valueOf(parts[0]) * 60 + Integer.valueOf(parts[1]);
@@ -169,7 +172,7 @@ public class Jeu extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             }
-                            nbCoups++;
+                            score.setText(String.valueOf(nbCoups));
                         } else if (carteRetourne == 3) {
                             Object id1 = premiere_carte_paire.getTag();
                             Object id2 = deuxieme_carte_paire.getTag();
@@ -247,7 +250,6 @@ public class Jeu extends AppCompatActivity {
                     temps = temps_clm - (int) intervalle / 1000;
                 else
                     temps = (int) intervalle / 1000;
-                System.out.println(temps);
                 final int minutes = temps / 60;
                 final int secondes = temps - (minutes * 60);
                 runOnUiThread(new Runnable() {
@@ -256,7 +258,6 @@ public class Jeu extends AppCompatActivity {
                         score.setText(df.format(minutes) + ":" + df.format(secondes));
                     }
                 });
-                System.out.println("TEST");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
