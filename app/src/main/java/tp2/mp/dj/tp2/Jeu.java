@@ -17,8 +17,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import android.widget.Toast;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,12 +27,8 @@ import java.util.List;
 /**
  * Classe qui fait tout le jeu
  */
-public class Jeu extends AppCompatActivity implements View.OnClickListener{
+public class Jeu extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * Variables globales de l'application
-     */
-    private Toolbar toolbar = null;
     private GridView table = null;
     private TextView score = null;
 
@@ -56,7 +50,10 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_jeu);
+        /**
+         * Variables globales de l'application
+         */
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_jeu);
         if (toolbar != null) setSupportActionBar(toolbar);
 
         table = (GridView) findViewById(R.id.jeu_cartes);
@@ -149,7 +146,6 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO : Doriane a commenter
     private class Chrono extends AsyncTask<Void, Integer, Void> {
 
         private Date start;
@@ -157,27 +153,34 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         private int temps_clm = 0;
 
         public Chrono(boolean clm) {
+            // Si on est en mode Contre-la-montre, on récupère le temps maximum
             if (clm)
                 temps_clm = getTempsClm();
         }
 
         @Override
         protected void onPreExecute() {
+            // On récupère le temps actuel dans une variable start
             start = Calendar.getInstance().getTime();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
+            // Tant que le thread n'est pas arrêté
             while (!this.isCancelled()) {
+                // On récupère le temps courant
                 Date now = Calendar.getInstance().getTime();
                 long intervalle = now.getTime() - start.getTime();
-                Integer temps;
+                int temps;
+                // Si on est en mode Contre-la-montre, on affiche le temps qu'il reste
                 if (temps_clm != 0)
                     temps = temps_clm - (int) intervalle / 1000;
+                    // Sinon on affiche le temps passé depuis la variable start
                 else
                     temps = (int) intervalle / 1000;
                 final int minutes = temps / 60;
                 final int secondes = temps - (minutes * 60);
+                // On modifie la valeur du TextView dans le Thread UI (là où il a été déclaré)
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -204,7 +207,9 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
 
 
     // Donne le temps du départ du contre-la-montre
-    private int getTempsClm(){ return 10 * pairesTotales; }
+    private int getTempsClm() {
+        return 10 * pairesTotales;
+    }
 
     // Evenement onClick des cartes
     // Définit si on trouve ou non une paire
@@ -227,7 +232,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
                         partieGagnee();
                     }
                 }
-                if(mode==0) score.setText(String.valueOf(nbCoups));
+                if (mode == 0) score.setText(String.valueOf(nbCoups));
             } else if (carteRetourne == 3) {
                 Object id1 = premiere_carte_paire.getTag();
                 Object id2 = deuxieme_carte_paire.getTag();
@@ -243,11 +248,11 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
     }
 
     // Fin d'une partie quand elle est gagnee
-    private void partieGagnee(){
+    private void partieGagnee() {
         if (chrono != null)
             chrono.cancel(true);
         String[] parts;
-        Integer temps;
+        int temps;
         switch (mode) {
             case 0: // mode Zen
                 AjoutClassement(nbCoups, 0);
@@ -265,13 +270,13 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         }
         Intent intent = new Intent(Jeu.this, Resultats.class);
         intent.putExtra("RESULTATS", true);
-        intent.putExtra("MODE",mode);
+        intent.putExtra("MODE", mode);
         startActivity(intent);
     }
 
     // On selectionne les id (parmis 10 possibles) des cartes qui vont intégrer notre jeu
     // On crée et ajoute des cartes au gridView
-    private void ajoutCarteGridView(String avant, int arriere){
+    private void ajoutCarteGridView(String avant, int arriere) {
         List<Integer> jeu = new ArrayList<>();
         List<ImageView> cartes = new ArrayList<>();
         List<Integer> numero = new ArrayList<>();

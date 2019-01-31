@@ -1,11 +1,9 @@
 package tp2.mp.dj.tp2;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,14 +15,14 @@ import java.util.List;
  */
 public class TraitementClassement {
 
-    SharedPreferences prefs = null;
+    SharedPreferences prefs;
 
     public TraitementClassement(SharedPreferences p) {
         prefs = p;
     }
 
 
-    public void run(Joueur j, int mode){
+    public void run(Joueur j, int mode) {
         // On definit le mode de jeu
         String nom_prefs = "";
         switch (mode) {
@@ -46,7 +44,7 @@ public class TraitementClassement {
 
         // On transforme la chaine de caractere en JSON
         // Et chaque joueur JSON en un élément Joueur qu'on met dans une liste
-        if(classement_modif != null) {
+        if (classement_modif != null) {
             try {
                 JSONArray json_joueurs = new JSONArray(classement_modif);
                 for (int i = 0; i < json_joueurs.length(); i++) {
@@ -63,7 +61,7 @@ public class TraitementClassement {
 
 
         //On trie les joueurs en fonction de leur classement
-        Collections.sort(list_classement,new Comparator<Joueur>() {
+        Collections.sort(list_classement, new Comparator<Joueur>() {
             @Override
             public int compare(Joueur j1, Joueur j2) {
                 return Integer.valueOf(j1.score).compareTo(Integer.valueOf(j2.score));
@@ -72,8 +70,8 @@ public class TraitementClassement {
 
 
         //On garde les 5 meilleurs
-        if(list_classement.size()>5)
-            list_classement = list_classement.subList(0,5);
+        if (list_classement.size() > 5)
+            list_classement = list_classement.subList(0, 5);
 
         //On retransforme les Joueur en JSON
         JSONArray json_joueurs_nouveaux = new JSONArray();

@@ -3,9 +3,11 @@ package tp2.mp.dj.tp2;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 
+/**
+ * Classe qui définit un joueur pour le classement
+ */
 public class Joueur {
 
     String name;
@@ -33,8 +35,7 @@ public class Joueur {
     // Renvoie le joueur sous forme d'un JSONObject
     public JSONObject toJson() {
         try {
-            JSONObject jsonObject = new JSONObject().put("name", name).put("score", score);
-            return jsonObject;
+            return new JSONObject().put("name", name).put("score", score);
         } catch (JSONException e) {
             e.printStackTrace();
         }

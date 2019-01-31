@@ -20,19 +20,18 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Classe qui permet de modifier les préférences (nombre de cartes, choix du dos de cartes, choix du thème, nom du joueur, mode de jeu)
+ */
 public class MainActivity extends AppCompatActivity {
 
     private EditText editName = null;
     private SeekBar seeknbcartes = null;
-    private Toolbar toolbar = null;
     private TableRow tableRow_fonds = null;
     private TableRow tableRow_themes = null;
     private RadioGroup group = null;
     private TextView valeurnbcartes = null;
     private ImageView play = null;
-    private int nb_fonds = 4;
-    private int nb_themes = 4;
     private List<String> themes = Arrays.asList("pokemon", "chaton", "chiot", "minion");
     private int mode_jeu = 0;
     private int selected_fond;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         });
         BuildChoixFonds();
         BuildChoixThemes();
-        toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
         if (toolbar != null) setSupportActionBar(toolbar);
 
     }
@@ -131,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Affiche les différents choix possibles de fonds
     private void BuildChoixFonds() {
+        int nb_fonds = 4;
         for (int i = 0; i < nb_fonds; i++) {
             ImageView image = new ImageView(this);
             image.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
@@ -157,10 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Affiche les différents choix possibles de thèmes
     private void BuildChoixThemes() {
+        int nb_themes = 4;
         for (int i = 0; i < nb_themes; i++) {
             ImageView image = new ImageView(this);
             image.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-            int drawableResourceId = this.getResources().getIdentifier(themes.get(i).toString() + 0, "drawable", this.getPackageName());
+            int drawableResourceId = this.getResources().getIdentifier(themes.get(i) + 0, "drawable", this.getPackageName());
             image.setImageResource(drawableResourceId);
             image.setAdjustViewBounds(true);
             image.setPadding(4, 4, 4, 4);
