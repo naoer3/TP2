@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="40dp"
+    android:paddingRight="20dp"
     tools:context=".ClassementFragment">
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView2"

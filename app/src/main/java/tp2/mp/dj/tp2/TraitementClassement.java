@@ -23,7 +23,7 @@ public class TraitementClassement {
 
 
     public void run(Joueur j, int mode) {
-        // On definit le mode de jeu
+        // En fonction du mode de jeu, on spécifie quelle SharedPreferences on doit aller regarder
         String nom_prefs = "";
         switch (mode) {
             case 0:
@@ -60,7 +60,7 @@ public class TraitementClassement {
         list_classement.add(j);
 
 
-        //On trie les joueurs en fonction de leur classement
+        // On trie les joueurs en fonction de leur classement
         Collections.sort(list_classement, new Comparator<Joueur>() {
             @Override
             public int compare(Joueur j1, Joueur j2) {
@@ -69,17 +69,17 @@ public class TraitementClassement {
         });
 
 
-        //On garde les 5 meilleurs
+        // On garde les 5 meilleurs
         if (list_classement.size() > 5)
             list_classement = list_classement.subList(0, 5);
 
-        //On retransforme les Joueur en JSON
+        // On retransforme les Joueur en JSON
         JSONArray json_joueurs_nouveaux = new JSONArray();
         for (Joueur joueur : list_classement) {
             json_joueurs_nouveaux.put(joueur.toJson());
         }
 
-        //On actualise les SharedPreferences
+        // On actualise les SharedPreferences
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(nom_prefs, json_joueurs_nouveaux.toString());
         editor.apply();

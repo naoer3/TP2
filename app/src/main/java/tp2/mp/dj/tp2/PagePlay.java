@@ -24,7 +24,7 @@ public class PagePlay extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
+        // Suite au click sur le bouton, on lance une partie
         btn_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
