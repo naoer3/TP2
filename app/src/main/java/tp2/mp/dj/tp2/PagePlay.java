@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * Page de démarrage du Jeu avec un bouton play qui mène au Jeu
+ */
 public class PagePlay extends AppCompatActivity {
 
     private ImageView btn_play = null;
