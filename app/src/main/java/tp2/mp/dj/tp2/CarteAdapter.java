@@ -16,7 +16,6 @@ public class CarteAdapter extends BaseAdapter {
     private List<ImageView> images;
 
     public CarteAdapter(Context c, List<ImageView> liste) {
-        Context mContext = c;
         images = liste;
     }
 

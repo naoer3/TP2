@@ -88,7 +88,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-        // On recupere la valeur des SharedPreferences
+        // On récupère la valeur des SharedPreferences
         pairesTotales = prefs.getInt("NB_CARTES", 8);
         String avant = prefs.getString("THEME", "chaton");
         int arriere = prefs.getInt("FOND", 0);
@@ -97,7 +97,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener {
         // Ajout des cartes de notre jeu dans le gridView
         ajoutCarteGridView(avant, arriere);
 
-        // On crée les chronomètres utilisé en fonction du mode de jeu
+        // On crée le chronomètre utilisé en fonction du mode de jeu
         switch (mode) {
             case 0: // Zen
                 score.setText(String.valueOf(nbCoups));
@@ -146,6 +146,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+    // Permet l'affichage du timer via une classe dérivée de AsyncTask
     private class Chrono extends AsyncTask<Void, Integer, Void> {
 
         private Date start;
@@ -232,7 +233,9 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener {
                         partieGagnee();
                     }
                 }
+                // Si on est en mode Zen, on transmet le nombre de coups
                 if (mode == 0) score.setText(String.valueOf(nbCoups));
+                // Sinon on transmet le temps
             } else if (carteRetourne == 3) {
                 Object id1 = premiere_carte_paire.getTag();
                 Object id2 = deuxieme_carte_paire.getTag();
