@@ -8,6 +8,9 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+/**
+ * Classe permettant l'affichage d'un ImageView dans un GridView
+ */
 public class CarteAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -31,14 +34,6 @@ public class CarteAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        /*ImageView imageView;
-        if (convertView == null) {
-            imageView = new ImageView(mContext);
-        } else {
-            imageView = (ImageView) convertView;
-        }*/
-
-        //imageView.setImageResource(images.get(position));
         return images.get(position);
     }
 }

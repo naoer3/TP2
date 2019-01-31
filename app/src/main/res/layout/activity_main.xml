@@ -17,13 +17,19 @@
         android:theme="?attr/actionBarTheme"
         app:title="Paramètres" />
 
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nom du joueur : "
+        android:textColorLink="@color/colorAccent" />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/ecris_ton_nom_ici"
         android:inputType="textPersonName" />
 
     <TextView
@@ -110,12 +116,13 @@
         style="@android:style/Widget.DeviceDefault.SeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="5"
-        android:progress="1" />
+        android:max="3"
+        android:progress="1"/>
 
-    <Button
-        android:id="@+id/validate"
+    <ImageView
+        android:id="@+id/btn_play2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/valider" />
+        app:srcCompat="@drawable/play2" />
+
 </LinearLayout>
