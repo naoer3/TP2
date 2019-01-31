@@ -22,7 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nom du joueur : "
-        android:textColorLink="@color/colorAccent" />
+        android:textColor="@android:color/white"
+        android:textColorLink="@color/colorAccent"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/name"
@@ -30,13 +32,17 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/choixavant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choisis_le_th_me_des_cartes" />
+        android:paddingTop="10dp"
+        android:text="@string/choisis_le_th_me_des_cartes"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <TableRow
         android:id="@+id/choixthemes"
@@ -49,7 +55,10 @@
         android:id="@+id/choixarriere"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choisis_le_dos_des_cartes" />
+        android:paddingTop="10dp"
+        android:text="@string/choisis_le_dos_des_cartes"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <TableRow
         android:id="@+id/choixfonds"
@@ -62,7 +71,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mode_de_jeu" />
+        android:paddingTop="10dp"
+        android:text="@string/mode_de_jeu"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <RadioGroup
         android:id="@+id/radiogroup"
@@ -75,34 +87,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/zen" />
+            android:text="@string/zen"
+            android:textColor="@android:color/white" />
 
         <RadioButton
             android:id="@+id/rbnormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/normal" />
+            android:text="@string/normal"
+            android:textColor="@android:color/white" />
 
         <RadioButton
             android:id="@+id/rbclm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/contre_la_montre" />
+            android:text="@string/contre_la_montre"
+            android:textColor="@android:color/white" />
 
     </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/nbcartes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nombre_de_cartes" />
+            android:text="@string/nombre_de_cartes"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/valeurnbcartes"
