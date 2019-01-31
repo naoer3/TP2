@@ -9,12 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+/**
+ * Classe qui affiche le classement
+ */
 public class ClassementActivity extends AppCompatActivity {
 
     private ViewPager viewPager = null;
     private TabLayout tabLayout = null;
-    private SimpleFragmentPagerAdapter adapter;
-    private Toolbar toolbar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +24,14 @@ public class ClassementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_classement);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_classement);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_classement);
         if (toolbar != null) setSupportActionBar(toolbar);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

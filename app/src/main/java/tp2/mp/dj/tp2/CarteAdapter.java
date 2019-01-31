@@ -13,11 +13,10 @@ import java.util.List;
  */
 public class CarteAdapter extends BaseAdapter {
 
-    private Context mContext;
     private List<ImageView> images;
 
     public CarteAdapter(Context c, List<ImageView> liste) {
-        mContext = c;
+        Context mContext = c;
         images = liste;
     }
 

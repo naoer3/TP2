@@ -15,37 +15,38 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
-
+/**
+ * Classe qui définit le fragment dans le viewpager du classement
+ */
 public class ClassementFragment extends Fragment {
 
-    private View view;
     private TableLayout tableLayout = null;
     private String nom_prefs;
-    private TextView text = null;
     private int mode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_classement, container, false);
+        View view = inflater.inflate(R.layout.fragment_classement, container, false);
         tableLayout = view.findViewById(R.id.tbclassement);
-        text = (TextView) view.findViewById(R.id.textView5);
+        TextView text = (TextView) view.findViewById(R.id.textView5);
         Bundle args = getArguments();
-        mode = args.getInt("MODE", 0);
-        // En fonction du mode on spécifie le nom du SharedPreferences à aller chercher
-        switch (mode) {
-            case 0:
-                nom_prefs = "CLASSEMENT_ZEN";
-                text.setText("Nombre de coups");
-                break;
-            case 1:
-                nom_prefs = "CLASSEMENT_NORMAL";
-                break;
-            case 2:
-                nom_prefs = "CLASSEMENT_CLM";
-                break;
+        if (args!=null) {
+            mode = args.getInt("MODE", 0);
+            // En fonction du mode on spécifie le nom du SharedPreferences à aller chercher
+            switch (mode) {
+                case 0:
+                    nom_prefs = "CLASSEMENT_ZEN";
+                    text.setText("Nombre de coups");
+                    break;
+                case 1:
+                    nom_prefs = "CLASSEMENT_NORMAL";
+                    break;
+                case 2:
+                    nom_prefs = "CLASSEMENT_CLM";
+                    break;
+            }
         }
         return view;
     }
