@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+/**
+ * Page qui indique si on a gagne ou perdu la partie
+ */
 public class Resultats extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton btn_recommencer = null;
@@ -35,8 +38,10 @@ public class Resultats extends AppCompatActivity implements View.OnClickListener
             mode = intent.getIntExtra("MODE", -1);
         }
         if (!resultats) image.setImageResource(R.drawable.perdu);
+
     }
 
+    // Au clic sur un bouton, on retourne sur la page jeu ou on va sur le classement
     @Override
     public void onClick(View view) {
         Intent intent;
