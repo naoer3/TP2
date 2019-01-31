@@ -26,19 +26,23 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editName = null;
     private SeekBar seeknbcartes = null;
-    private Button validate = null;
-    private int nb_fonds =4 ;
-    private int nb_themes = 4;
-    private List<String> themes = Arrays.asList("pokemon", "chaton", "chiot", "minion");
+    private Toolbar toolbar = null;
     private TableRow tableRow_fonds = null;
     private TableRow tableRow_themes = null;
     private RadioGroup group = null;
     private TextView valeurnbcartes = null;
+    private ImageView play = null;
+
+    private int nb_fonds =4 ;
+    private int nb_themes = 4;
+    private List<String> themes = Arrays.asList("pokemon", "chaton", "chiot", "minion");
+
+
     private int mode_jeu = 0;
     private int selected_fond;
     private int selected_theme;
     private int nb_cartes;
-    private Toolbar toolbar = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        validate = (Button) findViewById(R.id.validate);
         //LayoutInflater inflater = getLayoutInflater();
         tableRow_fonds = (TableRow) findViewById(R.id.choixfonds);
         tableRow_themes = (TableRow) findViewById(R.id.choixthemes);
@@ -77,16 +80,22 @@ public class MainActivity extends AppCompatActivity {
         BuildChoixThemes();
         toolbar = (Toolbar)findViewById(R.id.toolbar_settings);
         if(toolbar != null) setSupportActionBar(toolbar);
+
+        play = (ImageView)findViewById(R.id.btn_play2);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
         getPref();
-        validate.setOnClickListener(new View.OnClickListener() {
+
+        play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SavePreferences();
+                Intent intent;
+                intent = new Intent(MainActivity.this, Jeu.class);
+                startActivity(intent);
             }
         });
     }

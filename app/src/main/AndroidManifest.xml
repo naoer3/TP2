@@ -10,16 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ClassementActivity" />
-        <activity android:name=".TESTActivity"></activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Jeu">
+        <activity android:name=".TESTActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Jeu"/>
+        <activity android:name=".Resultats" />
+        <activity android:name=".PagePlay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Resultats"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
