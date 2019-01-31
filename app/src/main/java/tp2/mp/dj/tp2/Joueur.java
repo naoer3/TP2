@@ -54,7 +54,6 @@ public class Joueur {
 
     // Retourne le score du joueur sous forme "mm:ss"
     public String getScoreTemps() {
-
         Integer temps = Integer.valueOf(score);
         int minutes = temps / 60;
         int secondes = temps - (minutes * 60);

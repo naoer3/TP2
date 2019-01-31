@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-
 /**
  * Classe qui permet l'affichage de fragmens dans le viewPager
  */
@@ -18,7 +17,6 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.context = context;
     }
-
 
     @Override
     public Fragment getItem(int position) {

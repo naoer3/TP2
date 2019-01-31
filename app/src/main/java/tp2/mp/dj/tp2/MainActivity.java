@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         tableRow_themes = (TableRow) findViewById(R.id.choixthemes);
         group = findViewById(R.id.radiogroup);
         play = (ImageView) findViewById(R.id.btn_play2);
-        // Permet de maintenir à jour la valeur du nombre de cartes à jour en fonction de la valeur de la SeekBar
+
+        // Permet de maintenir à jour la valeur du nombre de cartes en fonction de la valeur de la SeekBar
         seeknbcartes.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -75,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         BuildChoixThemes();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
         if (toolbar != null) setSupportActionBar(toolbar);
-
     }
 
     @Override

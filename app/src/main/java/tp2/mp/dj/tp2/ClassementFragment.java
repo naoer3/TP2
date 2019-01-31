@@ -38,7 +38,7 @@ public class ClassementFragment extends Fragment {
             switch (mode) {
                 case 0:
                     nom_prefs = "CLASSEMENT_ZEN";
-                    text.setText("Nombre de coups");
+                    text.setText("Coups");
                     break;
                 case 1:
                     nom_prefs = "CLASSEMENT_NORMAL";
@@ -82,8 +82,6 @@ public class ClassementFragment extends Fragment {
                             case 2: // Score du joueur
                                 if (mode == 0) text.setText(joueur.getScore());
                                 else text.setText(joueur.getScoreTemps());
-
-
                                 break;
                         }
                         row.addView(text);
@@ -92,10 +90,12 @@ public class ClassementFragment extends Fragment {
                     tableLayout.addView(row);
                 }
             } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
 
+    //Défini le style des textes
     public TextView SetDesignedText(TextView text) {
         text.setTextSize(24);
         text.setTypeface(null, Typeface.BOLD_ITALIC);
