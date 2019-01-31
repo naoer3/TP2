@@ -15,42 +15,50 @@ public class Resultats extends AppCompatActivity implements View.OnClickListener
     private ImageButton btn_recommencer = null;
     private ImageButton btn_classement = null;
     private ImageView image = null;
+    private int mode = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats);
-        btn_classement = (ImageButton)findViewById(R.id.button_recommencer);
-        btn_recommencer = (ImageButton)findViewById(R.id.button_classement2);
-        image = (ImageView)findViewById(R.id.image_resultats);
+        btn_classement = (ImageButton) findViewById(R.id.button_recommencer);
+        btn_recommencer = (ImageButton) findViewById(R.id.button_classement2);
+        image = (ImageView) findViewById(R.id.image_resultats);
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         btn_recommencer.setOnClickListener(this);
         btn_classement.setOnClickListener(this);
         boolean resultats = true;
         Intent intent = getIntent();
+        if (intent != null) {
+            resultats = intent.getBooleanExtra("RESULTATS", true);
+            mode = intent.getIntExtra("MODE", -1);
+        }
+        if (!resultats) image.setImageResource(R.drawable.perdu);
 
-        // Si la partie est perdue, on change l'image de l'ImageView
-        if(intent != null) resultats = intent.getBooleanExtra("RESULTATS",true);
-        if(!resultats) image.setImageResource(R.drawable.perdu);
     }
 
     // Au clic sur un bouton, on retourne sur la page jeu ou on va sur le classement
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         Intent intent;
-        switch (view.getId()){
-            case R.id.button_recommencer :
+        switch (view.getId()) {
+            case R.id.button_recommencer:
                 intent = new Intent(Resultats.this, Jeu.class);
                 startActivity(intent);
                 break;
-            case R.id.button_classement2 :
+            case R.id.button_classement2:
                 intent = new Intent(Resultats.this, ClassementActivity.class);
+                if (mode != -1) intent.putExtra("MODE", mode);
                 startActivity(intent);
                 break;
         }
+    }
+
+    // Permet d'annuler toute action suite au bouton physique "back"
+    public void onBackPressed() {
     }
 }

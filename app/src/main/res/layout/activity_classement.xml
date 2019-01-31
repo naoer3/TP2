@@ -21,7 +21,8 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp" />
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

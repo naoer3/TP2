@@ -83,7 +83,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
             //Quand le temps, en mode contre-la-montre, arrive à sa fin, on perd
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().matches("00:00") && mode == 2 /* Mode contre-la-montre*/){
+                if (s.toString().matches("00:00") && mode == 2 /* Mode contre-la-montre*/) {
                     Intent intent = new Intent(Jeu.this, Resultats.class);
                     intent.putExtra("RESULTATS", false);
                     startActivity(intent);
@@ -202,6 +202,7 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         tc.run(new Joueur(nom, score), mode);
     }
 
+
     // Donne le temps du départ du contre-la-montre
     private int getTempsClm(){ return 10 * pairesTotales; }
 
@@ -304,5 +305,9 @@ public class Jeu extends AppCompatActivity implements View.OnClickListener{
         Collections.shuffle(cartes);
 
         table.setAdapter(new CarteAdapter(this, cartes));
+    }
+
+    // Permet d'annuler toute action suite au bouton physique "back"
+    public void onBackPressed() {
     }
 }

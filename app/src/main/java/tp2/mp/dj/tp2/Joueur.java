@@ -20,14 +20,17 @@ public class Joueur {
 
     }
 
+    // Renvoie le nom du joueur
     public String getName() {
         return name;
     }
 
+    // Renvoie le score du joueur
     public String getScore() {
         return score;
     }
 
+    // Renvoie le joueur sous forme d'un JSONObject
     public JSONObject toJson() {
         try {
             JSONObject jsonObject = new JSONObject().put("name", name).put("score", score);
@@ -38,6 +41,7 @@ public class Joueur {
         return null;
     }
 
+    // Récupère un joueur via un JSONObject
     public void fromJson(JSONObject jsonObject) {
         try {
             name = jsonObject.getString("name");
@@ -47,16 +51,13 @@ public class Joueur {
         }
     }
 
-    public String toString(){
-        return "Name : "+name+" / Score : "+score;
-    }
-
+    // Retourne le score du joueur sous forme "mm:ss"
     public String getScoreTemps() {
 
         Integer temps = Integer.valueOf(score);
         int minutes = temps / 60;
-        int secondes = temps - (minutes*60);
+        int secondes = temps - (minutes * 60);
         DecimalFormat df = new DecimalFormat("00");
-        return df.format(minutes)+":"+df.format(secondes);
+        return df.format(minutes) + ":" + df.format(secondes);
     }
 }

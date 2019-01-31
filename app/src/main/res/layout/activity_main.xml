@@ -123,6 +123,7 @@
         android:id="@+id/btn_play2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="40dp"
         app:srcCompat="@drawable/play2" />
 
 </LinearLayout>
